@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday MARSH 🎮</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --blue:#4fc3ff;
+  --dark:#020024;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Segoe UI, sans-serif;
+}
+
+body{
+  background:radial-gradient(circle at top, #0a2cff, var(--dark));
+  color:white;
+  overflow-x:hidden;
+}
+
+/* NAV */
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:15px 40px;
+  background:rgba(0,0,0,.6);
+  backdrop-filter:blur(8px);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:1000;
+}
+nav h2{
+  color:var(--blue);
+  text-shadow:0 0 15px var(--blue);
+}
+nav button{
+  background:none;
+  border:2px solid var(--blue);
+  color:var(--blue);
+  padding:8px 20px;
+  border-radius:20px;
+  cursor:pointer;
+}
+nav button:hover{
+  background:var(--blue);
+  color:var(--dark);
+}
+
+/* SECTIONS */
+section{
+  min-height:100vh;
+  padding:140px 60px;
+  text-align:center;
+}
+.glow{
+  color:var(--blue);
+  text-shadow:0 0 30px var(--blue);
+}
+.big{
+  font-size:4rem;
+}
+.card{
+  max-width:900px;
+  margin:40px auto;
+  padding:40px;
+  background:rgba(0,0,0,.55);
+  border:2px solid var(--blue);
+  border-radius:20px;
+  box-shadow:0 0 40px rgba(79,195,255,.4);
+  font-size:1.3rem;
+  line-height:1.9;
+}
+
+/* BUTTONS */
+.action{
+  margin-top:30px;
+  padding:15px 40px;
+  border-radius:30px;
+  border:2px solid var(--blue);
+  background:none;
+  color:var(--blue);
+  font-size:1.1rem;
+  cursor:pointer;
+}
+.action:hover{
+  background:var(--blue);
+  color:var(--dark);
+  box-shadow:0 0 25px var(--blue);
+}
+
+/* CURSOR */
+.cursor{
+  position:fixed;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  background:rgba(79,195,255,.6);
+  box-shadow:0 0 20px var(--blue);
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  z-index:9999;
+}
+
+/* PARTICLES */
+.p{
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:var(--blue);
+  border-radius:50%;
+  animation:float linear infinite;
+}
+@keyframes float{
+  from{transform:translateY(110vh)}
+  to{transform:translateY(-10vh)}
+}
+
+/* FIREWORK */
+.fw{
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:var(--blue);
+  border-radius:50%;
+  animation:boom 1s ease-out forwards;
+}
+@keyframes boom{
+  to{transform:scale(15);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <h2>MARSH 🎮</h2>
+  <button onclick="scrollToSection('wish')">BIRTHDAY</button>
+</nav>
+
+<div class="cursor" id="cursor"></div>
+
+<section>
+  <h1 class="big glow">HAPPY BIRTHDAY</h1>
+  <h2 class="glow">MARSH</h2>
+  <p style="margin-top:20px;font-size:1.3rem;">
+    Today isn’t just a date — it’s a level-up.
+  </p>
+  <button class="action" onclick="scrollToSection('wish')">
+    ENTER EXPERIENCE
+  </button>
+</section>
+
+<section id="wish">
+  <div class="card" id="type"></div>
+</section>
+
+<script>
+/* TYPING MESSAGE */
+const msg = `
+🎂 Happy Birthday, MARSH!
+
+Today you unlocked a new level in life.
+May your health bar stay full,
+your grind always pay off,
+and your wins feel earned.
+
+High FPS in games,
+zero lag in real life,
+and teammates who respect the play.
+
+Stay sharp, stay humble,
+and keep being the kind of player
+everyone respects.
+
+GGs today and always. 🎮💙
+`;
+
+let i=0;
+function type(){
+  if(i<msg.length){
+    document.getElementById("type").innerHTML += msg.charAt(i);
+    i++;
+    setTimeout(type,30);
+  }
+}
+type();
+
+/* PARTICLES */
+for(let i=0;i<80;i++){
+  let p=document.createElement("div");
+  p.className="p";
+  p.style.left=Math.random()*100+"vw";
+  p.style.animationDuration=(5+Math.random()*6)+"s";
+  document.body.appendChild(p);
+}
+
+/* CURSOR */
+const c=document.getElementById("cursor");
+document.addEventListener("mousemove",e=>{
+  c.style.left=e.clientX+"px";
+  c.style.top=e.clientY+"px";
+});
+
+/* FIREWORKS */
+document.addEventListener("click",e=>{
+  let f=document.createElement("div");
+  f.className="fw";
+  f.style.left=e.clientX+"px";
+  f.style.top=e.clientY+"px";
+  document.body.appendChild(f);
+  setTimeout(()=>f.remove(),1000);
+});
+
+function scrollToSection(id){
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+</script>
+
+</body>
+</html>
